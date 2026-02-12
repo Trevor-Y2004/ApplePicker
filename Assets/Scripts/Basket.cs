@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.AccessControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Basket : MonoBehaviour
 {
-    //void Start() { }
+
+    public ScoreCounter scoreCounter;
+    void Start()
+    {
+        GameObject scoreGO = GameObject.Find("ScoreCounter");
+        scoreCounter = scoreGO.GetComponent<ScoreCounter>();
+    }
     void Update()
     {
         // Get the current screen position of the mouse from Input
@@ -22,7 +29,7 @@ public class Basket : MonoBehaviour
 
         // Move the x position of this Basket to the x position of the Mouse
         Vector3 pos = this.transform.position;
-        pos.x = mousePos3D.x;
+        pos.x = Mathf.Clamp(mousePos3D.x, -24f, 24f);
         this.transform.position = pos;
     }
 
@@ -33,6 +40,8 @@ public class Basket : MonoBehaviour
         if (collidedWith.CompareTag("Apple"))
         {
             Destroy(collidedWith);
+            scoreCounter.score += 100;
+            HighScore.TRY_SET_HIGH_SCORE(scoreCounter.score);
         }
     }
 }

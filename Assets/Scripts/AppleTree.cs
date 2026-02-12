@@ -25,7 +25,6 @@ public class AppleTree : MonoBehaviour
     {
         // Start dropping apples
         Invoke("DropApple", 2f);
-        Debug.Log("Drop apple in start invoked");
     }
 
     void DropApple()
@@ -33,7 +32,6 @@ public class AppleTree : MonoBehaviour
         GameObject apple = Instantiate<GameObject>(applePrefab);
         apple.transform.position = transform.position;
         Invoke("DropApple", appleDropDelay);
-        Debug.Log("DropApple in drop invoked");
 
     }
 
