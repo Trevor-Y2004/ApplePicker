@@ -9,6 +9,8 @@ public class AppleTree : MonoBehaviour
 
     public GameObject applePrefab;
 
+    public GameObject badApplePrefab;
+
     //Speed at which the AppleTree moves
     public float speed = 1f;
 
@@ -21,10 +23,13 @@ public class AppleTree : MonoBehaviour
     // Seconds between Apples instantiations
     public float appleDropDelay = 1f;
 
+    private LayerMask appleLayer;
+
     void Start()
     {
         // Start dropping apples
         Invoke("DropApple", 2f);
+        Invoke("DropBadApple", Random.Range(0.5f, 6f));
     }
 
     void DropApple()
@@ -33,6 +38,26 @@ public class AppleTree : MonoBehaviour
         apple.transform.position = transform.position;
         Invoke("DropApple", appleDropDelay);
 
+    }
+
+    void DropBadApple()
+    {
+        Vector3 spawnPos = transform.position;
+
+        //check if space is occupied at layer Apple
+        //the apple has a radius of 0.5f, but we dont want the apples to spawn to close
+        float radius = 1.5f;
+        bool occupied = Physics.CheckSphere(spawnPos, radius, appleLayer);
+
+        if (!occupied)
+        {
+            GameObject badApple = Instantiate<GameObject>(badApplePrefab);
+            badApple.transform.position = transform.position;
+        }
+
+
+        float delay = Random.Range(0.5f, 6f);
+        Invoke("DropBadApple", delay);
     }
 
     void Update()

@@ -954,6 +954,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5267672828822216980, guid: 7bd6c75fa6a7df898bdd8a6d0d0827ff, type: 3}
     - target: {fileID: 6304372381572917837, guid: 24b52b48aa4bef69080e8c2d09c06513, type: 3}
+      propertyPath: badApplePrefab
+      value: 
+      objectReference: {fileID: 3330564640315870952, guid: 9514483b488345496bdd4e9aa5b50bac, type: 3}
+    - target: {fileID: 6304372381572917837, guid: 24b52b48aa4bef69080e8c2d09c06513, type: 3}
       propertyPath: leftAndRightEdge
       value: 24
       objectReference: {fileID: 0}
